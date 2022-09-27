@@ -1,5 +1,7 @@
 import Button from '@mui/material/Button';
 import BlankWord from './blankWord/BlankWord';
+import TimeStamp from './timeStamp/TimeStamp';
+import classes from './Training.module.css'
 
 const SENTENCES_RAW =
     [{
@@ -29,19 +31,25 @@ function Training(props) {
     });
 
     return (
-        <div>
+        <div className={classes.trainingContainer}>
             <h1>{props.title}</h1>
-            <div>
-                <h2>Transcription</h2>
 
+            <h2>{props.chapterName}</h2>
+            <h3>{props.chapterTitle}</h3>
+            <div className={classes.column}>
                 {sentences.map(sentence => {
-                    return <div>
-                        {sentence.words.map(word => { return <BlankWord wordOriginal={word} /> })}
-                    </div>
+                    return (
+                        <div className={classes.sentenceContainer}>
+                            <TimeStamp timeStamp={sentence.timeStamp}/>
+                            
+                            <div className={classes.row}>
+                                {sentence.words.map(word => { return <BlankWord wordOriginal={word} /> })}
+                            </div>
+                        </div>);
                 })}
-
-                <Button variant="contained">Submit</Button>
             </div>
+
+            <Button variant="contained">Submit</Button>
         </div>
     );
 }
