@@ -6,25 +6,24 @@ import { useState } from 'react';
 import classes from './AudioPlayer.module.css'
 import { convertMiliseconds } from '../../../helpers/helpers';
 
-function AudioPlayer() {
-
-    const [audioDuration, setAudioDuration] = useState(100);
-    const [currentValue, setCurrentValue] = useState(10);
-
-    function stopHandler() {
-        setCurrentValue(0);
+const AudioPlayer = (props) => {
+    
+    const [audioDuration, setAudioDuration] = useState(90);
+    
+    const stopHandler = () => {
+        props.setCurrentAudioValue(0);
     }
 
-    function replayHandler() {
-        if (currentValue == 0)
+    const replayHandler = () => {
+        if (props.currentAudioValue == 0)
             return;
-        setCurrentValue(currentValue - 5);
+        props.setCurrentAudioValue(props.currentAudioValue - 5);
     }
 
-    function forwardhandler() {
-        if (currentValue == 100)
+    const forwardhandler = () => {
+        if (props.currentAudioValue == 100)
             return;
-        setCurrentValue(currentValue + 5);
+        props.setCurrentAudioValue(props.currentAudioValue + 5);
     }
 
     return (
@@ -32,7 +31,7 @@ function AudioPlayer() {
             <div className={classes.stampContainer}>
                 <div className={classes.leftStamp}>
                     <b>
-                        {convertMiliseconds(currentValue)}
+                        {convertMiliseconds(props.currentAudioValue)}
                     </b>
                 </div>
                 <div className={classes.rightStamp}>
@@ -43,7 +42,7 @@ function AudioPlayer() {
             </div>
 
             <Box sx={{ width: '95%' }}>
-                <LinearProgress variant="buffer" value={currentValue} valueBuffer={50} />
+                <LinearProgress variant="buffer" value={props.currentAudioValue} valueBuffer={50} />
             </Box>
 
             <div className={classes.controlBar}>
