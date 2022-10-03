@@ -17,12 +17,12 @@ const SENTENCES_RAW =
         timeStamp: 33
     }];
 
-function preProcessString(sentence) {
+const preProcessString = (sentence) => {
     let words = sentence.trim().toLowerCase().replace(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '').split(' ').filter(x => x);
     return words;
 }
 
-function Training(props) {
+const Training = (props) => {
 
     let sentences = [];
 
@@ -40,7 +40,9 @@ function Training(props) {
                 {sentences.map(sentence => {
                     return (
                         <div className={classes.sentenceContainer}>
-                            <TimeStamp timeStamp={sentence.timeStamp}/>
+                            <TimeStamp timeStamp={sentence.timeStamp}
+                                       onTimeStampEvent={props.onTimeStampEvent}
+                            />
                             
                             <div className={classes.row}>
                                 {sentence.words.map(word => { return <BlankWord wordOriginal={word} /> })}
