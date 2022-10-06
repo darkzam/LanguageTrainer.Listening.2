@@ -5,4 +5,9 @@ const convertMiliseconds = miliseconds => {
     return `${minutes}:${seconds}`
 }
 
-export {convertMiliseconds};
+const preProcessWord = (word) => {
+    let cleanedWord = word.trim().toLowerCase().replace(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, '');
+    return cleanedWord;
+}
+
+export {convertMiliseconds, preProcessWord};
